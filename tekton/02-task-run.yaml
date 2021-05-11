@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: set-commit-status-2121
+  namespace: cicd
+spec:
+  taskRef:
+    kind: Task
+    name: set-commit-status
+  params:
+    - name: COMMIT_SHA
+      value: d3a3df455dcecda41bba39819f42b7fed91629a7
+    - name: DESCRIPTION
+      value: "Build has started"
+    - name: STATE
+      value: failed
+    - name: GIT_REPO
+      value: https://github.com/chetan-rns/gitops
+    - name: REPO
+      value: chetan-rns/gitops

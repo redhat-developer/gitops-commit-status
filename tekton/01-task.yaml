@@ -1,0 +1,41 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: set-commit-status
+  namespace: cicd
+spec:
+  params:
+  - default: api.github.com
+    name: GIT_REPO
+    type: string
+  - default: ""
+    name: API_PATH_PREFIX
+    type: string
+  - name: REPO
+    type: string
+  - default: git-host-access-token
+    name: GITHUB_TOKEN_SECRET_NAME
+    type: string
+  - default: token
+    name: GITHUB_TOKEN_SECRET_KEY
+    type: string
+  - name: COMMIT_SHA
+    type: string
+  - name: DESCRIPTION
+    type: string
+  - default: "continous-integration/tekton"
+    name: CONTEXT
+    type: string
+  - name: STATE
+    type: string
+  steps:
+  - env:
+    - name: GITHOSTACCESSTOKEN
+      valueFrom:
+        secretKeyRef:
+          key: $(params.GITHUB_TOKEN_SECRET_KEY)
+          name: $(params.GITHUB_TOKEN_SECRET_NAME)
+    image: quay.io/cbanavik/set-commit-status:v0.1
+    name: set-commit-status
+    script:
+      set-commit-status --url $(params.GIT_REPO) --path $(params.REPO) --sha $(params.COMMIT_SHA) --context $(params.CONTEXT) --status $(params.STATE)
