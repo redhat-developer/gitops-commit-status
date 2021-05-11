@@ -4,7 +4,7 @@ A simple Go program to set commit status. It uses [go-scm](https://github.com/je
 
 
 
-# Usage
+## Usage
 
 1. Run it locally
 
