@@ -1,8 +1,8 @@
 FROM openshift/origin-release:golang-1.16 AS builder
 
-WORKDIR /tmp/set-commit-status
-COPY . /tmp/set-commit-status
-RUN go build -o set-commit-status -mod=readonly .
+WORKDIR /tmp/gitops-commit-status
+COPY . /tmp/gitops-commit-status
+RUN go build -o gitops-commit-status -mod=readonly .
 
 FROM registry.access.redhat.com/ubi8/ubi-minimal
-COPY --from=builder /tmp/set-commit-status/set-commit-status /usr/local/bin
+COPY --from=builder /tmp/gitops-commit-status/gitops-commit-status /usr/local/bin

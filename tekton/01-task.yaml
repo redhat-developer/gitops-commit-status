@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: set-commit-status
+  name: gitops-commit-status
   namespace: cicd
 spec:
   params:
@@ -35,7 +35,7 @@ spec:
         secretKeyRef:
           key: $(params.GITHUB_TOKEN_SECRET_KEY)
           name: $(params.GITHUB_TOKEN_SECRET_NAME)
-    image: quay.io/cbanavik/set-commit-status:v0.1
-    name: set-commit-status
+    image: quay.io/redhat-developer/gitops-commit-status:v0.0.1
+    name: gitops-commit-status
     script:
-      set-commit-status --url $(params.GIT_REPO) --path $(params.REPO) --sha $(params.COMMIT_SHA) --context $(params.CONTEXT) --status $(params.STATE)
+      gitops-commit-status --url $(params.GIT_REPO) --path $(params.REPO) --sha $(params.COMMIT_SHA) --context $(params.CONTEXT) --status $(params.STATE)

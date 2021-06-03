@@ -1,4 +1,4 @@
-module github.com/chetan-rns/set-commit-status
+module github.com/chetan-rns/gitops-commit-status
 
 go 1.16
 
