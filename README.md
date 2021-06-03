@@ -1,4 +1,4 @@
-# set-commit-status
+# gitops-commit-status
 
 A simple Go program to set commit status. It uses [go-scm](https://github.com/jenkins-x/go-scm) to support multiple Git providers(GitHub, GitLab, etc).
 
@@ -9,9 +9,9 @@ A simple Go program to set commit status. It uses [go-scm](https://github.com/je
 1. Run it locally
 
 ```shell
-$ go build -o set-commit-status .
+$ go build -o gitops-commit-status .
 
-$ ./set-commit-status --sha <commit_sha> --url <git_repo_url> --token <token> --status <commit_status> --context <commit_status>
+$ ./gitops-commit-status --sha <commit_sha> --url <git_repo_url> --token <token> --status <commit_status> --context <commit_status>
 ```
 
 2. Tekton 
